@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useRecipes } from "./hooks/useRecipes";
+import { SearchBar } from "./components/SearchBar";
 
 function App() {
   const { recipes, addRecipe, updateRecipe, deleteRecipe } = useRecipes();
@@ -14,8 +15,8 @@ function App() {
   return (
     <div style={{ maxWidth: 900, margin: "0 auto", padding: "1.5rem" }}>
       <h1>Recipe Organizer 🍲</h1>
+      <SearchBar value={search} onChange={setSearch} />
       <p>Total recipes: {filtered.length}</p>
-      {/* Ovdje ćemo kasnije ubaciti SearchBar, RecipeForm i RecipeList */}
     </div>
   );
 }
