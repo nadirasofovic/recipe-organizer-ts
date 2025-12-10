@@ -1,4 +1,4 @@
-import { FormEvent, useState } from "react";
+import { type FormEvent, useState } from "react";
 import type { Ingredient } from "../types/recipe";
 
 interface RecipeFormProps {
@@ -6,6 +6,7 @@ interface RecipeFormProps {
     title: string;
     ingredients: Ingredient[];
     instructions: string;
+    imageDataUrl?: string;
   }) => void;
 }
 
@@ -13,6 +14,17 @@ export function RecipeForm({ onSubmit }: RecipeFormProps) {
   const [title, setTitle] = useState("");
   const [ingredientText, setIngredientText] = useState("");
   const [instructions, setInstructions] = useState("");
+  const [imageDataUrl, setImageDataUrl] = useState<string | undefined>();
+
+  function handleImageChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      setImageDataUrl(reader.result as string);
+    };
+    reader.readAsDataURL(file);
+  }
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -31,11 +43,13 @@ export function RecipeForm({ onSubmit }: RecipeFormProps) {
       title: title.trim(),
       ingredients,
       instructions: instructions.trim(),
+      imageDataUrl,
     });
 
     setTitle("");
     setIngredientText("");
     setInstructions("");
+    setImageDataUrl(undefined);
   }
 
   return (
@@ -72,6 +86,17 @@ export function RecipeForm({ onSubmit }: RecipeFormProps) {
             onChange={(e) => setInstructions(e.target.value)}
             rows={4}
             style={{ width: "100%", padding: "0.4rem" }}
+          />
+        </label>
+      </div>
+
+      <div>
+        <label>
+          Image
+          <input
+            type="file"
+            accept="image/*"
+            onChange={handleImageChange}
           />
         </label>
       </div>
