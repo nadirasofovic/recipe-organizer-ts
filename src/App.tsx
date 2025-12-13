@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useRecipes } from "./hooks/useRecipes";
 import { SearchBar } from "./components/SearchBar";
 import { RecipeForm } from "./components/RecipeForm";
-
+import { RecipeList } from "./components/RecipeList";
 
 function App() {
   const { recipes, addRecipe, updateRecipe, deleteRecipe } = useRecipes();
@@ -24,6 +24,7 @@ function App() {
       ...data,
     })
   }
+  
 />
       <p>Total recipes: {filtered.length}</p>
     </div>
