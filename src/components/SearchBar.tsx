@@ -5,14 +5,23 @@ interface SearchBarProps {
 
 export function SearchBar({ value, onChange }: SearchBarProps) {
   return (
-    <div style={{ margin: "1rem 0" }}>
+    <div className="searchRow">
       <input
+        className="input"
         type="text"
-        placeholder="Search by ingredient (e.g. chicken)"
+        placeholder="Search by ingredient (e.g. mlijeko)"
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        style={{ width: "100%", padding: "0.5rem" }}
       />
+
+      <button
+        className="btn"
+        type="button"
+        onClick={() => onChange("")}
+        disabled={!value}
+      >
+        Clear
+      </button>
     </div>
   );
 }

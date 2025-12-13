@@ -19,6 +19,7 @@ export function RecipeForm({ onSubmit }: RecipeFormProps) {
   function handleImageChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
+
     const reader = new FileReader();
     reader.onload = () => {
       setImageDataUrl(reader.result as string);
@@ -53,57 +54,49 @@ export function RecipeForm({ onSubmit }: RecipeFormProps) {
   }
 
   return (
-    <form onSubmit={handleSubmit} style={{ margin: "1rem 0" }}>
+    <form onSubmit={handleSubmit}>
       <h2>Add Recipe</h2>
 
-      <div>
-        <label>
-          Title
-          <input
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            style={{ width: "100%", padding: "0.4rem" }}
-          />
-        </label>
-      </div>
+      <label>Title</label>
+      <input
+        className="input"
+        value={title}
+        onChange={(e) => setTitle(e.target.value)}
+      />
 
-      <div>
-        <label>
-          Ingredients (comma-separated)
-          <input
-            value={ingredientText}
-            onChange={(e) => setIngredientText(e.target.value)}
-            style={{ width: "100%", padding: "0.4rem" }}
-          />
-        </label>
-      </div>
+      <label>Ingredients (comma-separated)</label>
+      <input
+        className="input"
+        value={ingredientText}
+        onChange={(e) => setIngredientText(e.target.value)}
+      />
 
-      <div>
-        <label>
-          Instructions
-          <textarea
-            value={instructions}
-            onChange={(e) => setInstructions(e.target.value)}
-            rows={4}
-            style={{ width: "100%", padding: "0.4rem" }}
-          />
-        </label>
-      </div>
+      <label>Instructions</label>
+      <textarea
+        className="input"
+        rows={4}
+        value={instructions}
+        onChange={(e) => setInstructions(e.target.value)}
+      />
 
-      <div>
-        <label>
-          Image
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleImageChange}
-          />
-        </label>
-      </div>
+      <label>Image</label>
+      <label className="fileUpload">
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleImageChange}
+          hidden
+        />
+        <span>Select image</span>
+      </label>
 
-      <button type="submit" style={{ marginTop: "0.5rem" }}>
+      <br />
+      <br />
+
+      <button className="btn" type="submit">
         Save Recipe
       </button>
     </form>
   );
 }
+

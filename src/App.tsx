@@ -5,7 +5,7 @@ import { RecipeForm } from "./components/RecipeForm";
 import { RecipeList } from "./components/RecipeList";
 
 function App() {
-  const { recipes, addRecipe, updateRecipe, deleteRecipe } = useRecipes();
+  const { recipes, addRecipe, deleteRecipe } = useRecipes();
   const [search, setSearch] = useState("");
 
   const filtered = recipes.filter((recipe) =>
@@ -15,18 +15,22 @@ function App() {
   );
 
   return (
-    <div style={{ maxWidth: 900, margin: "0 auto", padding: "1.5rem" }}>
-      <h1>Recipe Organizer 🍲</h1>
-      <SearchBar value={search} onChange={setSearch} />
-      <RecipeForm
-  onSubmit={(data) =>
-    addRecipe({
-      ...data,
-    })
-  }
-  
-/>
-      <p>Total recipes: {filtered.length}</p>
+    <div className="container">
+      <div className="titleRow">
+        <h1>Recipe Organizer</h1>
+      </div>
+
+      <div className="panel">
+        <SearchBar value={search} onChange={setSearch} />
+
+        <RecipeForm onSubmit={(data) => addRecipe({ ...data })} />
+
+        <div className="metaRow">
+          <p className="muted">Total recipes: {filtered.length}</p>
+        </div>
+      </div>
+
+      <RecipeList recipes={filtered} onDelete={deleteRecipe} />
     </div>
   );
 }
