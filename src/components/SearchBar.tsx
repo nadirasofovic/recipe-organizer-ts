@@ -9,9 +9,10 @@ export function SearchBar({ value, onChange }: SearchBarProps) {
       <input
         className="input"
         type="text"
-        placeholder="Search by ingredient (e.g. mlijeko)"
+        placeholder="Search by title, ingredient, or instructions..."
         value={value}
         onChange={(e) => onChange(e.target.value)}
+        aria-label="Search recipes"
       />
 
       <button
@@ -19,6 +20,7 @@ export function SearchBar({ value, onChange }: SearchBarProps) {
         type="button"
         onClick={() => onChange("")}
         disabled={!value}
+        aria-label="Clear search"
       >
         Clear
       </button>

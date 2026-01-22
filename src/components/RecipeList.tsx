@@ -4,9 +4,10 @@ import { RecipeCard } from "./RecipeCard";
 interface RecipeListProps {
   recipes: Recipe[];
   onDelete: (id: string) => void;
+  onEdit: (recipe: Recipe) => void;
 }
 
-export function RecipeList({ recipes, onDelete }: RecipeListProps) {
+export function RecipeList({ recipes, onDelete, onEdit }: RecipeListProps) {
   if (recipes.length === 0) {
     return <p className="muted">No recipes yet.</p>;
   }
@@ -18,6 +19,7 @@ export function RecipeList({ recipes, onDelete }: RecipeListProps) {
           key={recipe.id}
           recipe={recipe}
           onDelete={onDelete}
+          onEdit={onEdit}
         />
       ))}
     </div>
